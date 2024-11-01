@@ -6,16 +6,16 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.nopalsoft.zombiewars.objetos.Bullet;
-import com.nopalsoft.zombiewars.objetos.HeroFarmer;
-import com.nopalsoft.zombiewars.objetos.HeroForce;
-import com.nopalsoft.zombiewars.objetos.HeroLumber;
-import com.nopalsoft.zombiewars.objetos.Personajes;
-import com.nopalsoft.zombiewars.objetos.ZombieCuasy;
-import com.nopalsoft.zombiewars.objetos.ZombieFrank;
-import com.nopalsoft.zombiewars.objetos.ZombieKid;
-import com.nopalsoft.zombiewars.objetos.ZombieMummy;
-import com.nopalsoft.zombiewars.objetos.ZombiePan;
+import com.nopalsoft.zombiewars.objects.Bullet;
+import com.nopalsoft.zombiewars.objects.HeroFarmer;
+import com.nopalsoft.zombiewars.objects.HeroForce;
+import com.nopalsoft.zombiewars.objects.HeroLumber;
+import com.nopalsoft.zombiewars.objects.Personajes;
+import com.nopalsoft.zombiewars.objects.ZombieCuasy;
+import com.nopalsoft.zombiewars.objects.ZombieFrank;
+import com.nopalsoft.zombiewars.objects.ZombieKid;
+import com.nopalsoft.zombiewars.objects.ZombieMummy;
+import com.nopalsoft.zombiewars.objects.ZombiePan;
 
 public class ObjectCreatorManagerBox2d {
 

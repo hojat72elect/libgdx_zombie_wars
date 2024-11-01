@@ -9,18 +9,11 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.nopalsoft.zombiewars.AnimationSprite;
 import com.nopalsoft.zombiewars.Assets;
 import com.nopalsoft.zombiewars.Settings;
-import com.nopalsoft.zombiewars.objetos.Bullet;
-import com.nopalsoft.zombiewars.objetos.HeroFarmer;
-import com.nopalsoft.zombiewars.objetos.HeroForce;
-import com.nopalsoft.zombiewars.objetos.HeroLumber;
-import com.nopalsoft.zombiewars.objetos.Personajes;
-import com.nopalsoft.zombiewars.objetos.ZombieCuasy;
-import com.nopalsoft.zombiewars.objetos.ZombieFrank;
-import com.nopalsoft.zombiewars.objetos.ZombieKid;
-import com.nopalsoft.zombiewars.objetos.ZombieMummy;
-import com.nopalsoft.zombiewars.objetos.ZombiePan;
+import com.nopalsoft.zombiewars.objects.Bullet;
+import com.nopalsoft.zombiewars.objects.HeroForce;
+import com.nopalsoft.zombiewars.objects.Personajes;
+import com.nopalsoft.zombiewars.objects.ZombieKid;
 import com.nopalsoft.zombiewars.screens.Screens;
-import java.util.Iterator;
 
 public class WorldGameRenderer2 {
 
@@ -50,7 +43,7 @@ public class WorldGameRenderer2 {
         this.renderBox = new Box2DDebugRenderer();
         tiledRender = new OrthogonalTiledMapRenderer(Assets.map, oWorld.unitScale);
 
-        /**
+        /*
          * Entre mas chico el numero se renderean primero.
          */
         map1 = (TiledMapTileLayer) tiledRender.getMap().getLayers().get("1");
@@ -61,7 +54,7 @@ public class WorldGameRenderer2 {
 
     }
 
-    public void render(float delta) {
+    public void render() {
         oCam.zoom = Settings.zoom;
         oCam.position.x = oWorld.posCamara.x;
         oCam.position.y = oWorld.posCamara.y;
@@ -80,7 +73,6 @@ public class WorldGameRenderer2 {
 
         drawTiledInfront();
 
-//		renderBox.render(oWorld.oWorldBox, oCam.combined);
     }
 
     private void drawTiledInfront() {
@@ -106,21 +98,19 @@ public class WorldGameRenderer2 {
         if (map4 != null)
             tiledRender.renderTileLayer(map4);
 
-        // tiledRender.render();
+
         tiledRender.getBatch().end();
 
     }
 
     private void drawMalos() {
-        Iterator<Personajes> i = oWorld.arrFacingLeft.iterator();
 
-        while (i.hasNext()) {
+        for (Personajes obj : oWorld.arrFacingLeft) {
 
-            Personajes obj = i.next();
             AnimationSprite animWalk = null;
             AnimationSprite animAttack = null;
             AnimationSprite animDie = null;
-            Sprite spriteHurt = null;
+            com.badlogic.gdx.graphics.g2d.Sprite spriteHurt = null;
 
             float ajusteY = 0;
             float size = 0;
@@ -132,35 +122,35 @@ public class WorldGameRenderer2 {
                 spriteHurt = Assets.zombieKidHurt;
                 ajusteY = -.033f;
                 size = .8f;
-            } else if (obj instanceof ZombieCuasy) {
+            } else if (obj instanceof com.nopalsoft.zombiewars.objects.ZombieCuasy) {
                 animWalk = Assets.zombieCuasyWalk;
                 animAttack = Assets.zombieCuasyAttack;
                 animDie = Assets.zombieCuasyDie;
                 spriteHurt = Assets.zombieCuasyHurt;
                 ajusteY = -.035f;
                 size = .8f;
-            } else if (obj instanceof ZombieMummy) {
+            } else if (obj instanceof com.nopalsoft.zombiewars.objects.ZombieMummy) {
                 animWalk = Assets.zombieMummyWalk;
                 animAttack = Assets.zombieMummyAttack;
                 animDie = Assets.zombieMummyDie;
                 spriteHurt = Assets.zombieMummyHurt;
                 ajusteY = -.035f;
                 size = .8f;
-            } else if (obj instanceof ZombiePan) {
+            } else if (obj instanceof com.nopalsoft.zombiewars.objects.ZombiePan) {
                 animWalk = Assets.zombiePanWalk;
                 animAttack = Assets.zombiePanAttack;
                 animDie = Assets.zombiePanDie;
                 spriteHurt = Assets.zombiePanHurt;
                 ajusteY = -.038f;
                 size = .8f;
-            } else if (obj instanceof ZombieFrank) {
+            } else if (obj instanceof com.nopalsoft.zombiewars.objects.ZombieFrank) {
                 animWalk = Assets.zombieFrankWalk;
                 animAttack = Assets.zombieFrankAttack;
                 animDie = Assets.zombieFrankDie;
                 spriteHurt = Assets.zombieFrankHurt;
                 ajusteY = -.033f;
                 size = .8f;
-            } else if (obj instanceof HeroForce) {
+            } else if (obj instanceof com.nopalsoft.zombiewars.objects.HeroForce) {
                 animWalk = Assets.heroForceWalk;
                 animAttack = Assets.heroForceShoot;
                 animDie = Assets.heroForceDie;
@@ -168,16 +158,16 @@ public class WorldGameRenderer2 {
                 size = .7f;
             }
 
-            Sprite spriteFrame = null;
+            com.badlogic.gdx.graphics.g2d.Sprite spriteFrame = null;
 
-            if (obj.state == Personajes.STATE_NORMAL) {
+            if (obj.state == com.nopalsoft.zombiewars.objects.Personajes.STATE_NORMAL) {
                 spriteFrame = animWalk.getKeyFrame(obj.stateTime, true);
 
-            } else if (obj.state == Personajes.STATE_ATTACK) {
+            } else if (obj.state == com.nopalsoft.zombiewars.objects.Personajes.STATE_ATTACK) {
                 spriteFrame = animAttack.getKeyFrame(obj.stateTime, false);
-            } else if (obj.state == Personajes.STATE_DEAD) {
+            } else if (obj.state == com.nopalsoft.zombiewars.objects.Personajes.STATE_DEAD) {
                 spriteFrame = animDie.getKeyFrame(obj.stateTime, false);
-            } else if (obj.state == Personajes.STATE_HURT) {
+            } else if (obj.state == com.nopalsoft.zombiewars.objects.Personajes.STATE_HURT) {
                 spriteFrame = spriteHurt;
             }
 
@@ -190,15 +180,13 @@ public class WorldGameRenderer2 {
     }
 
     private void drawFacingRight() {
-        Iterator<Personajes> i = oWorld.arrFacingRight.iterator();
 
-        while (i.hasNext()) {
+        for (com.nopalsoft.zombiewars.objects.Personajes obj : oWorld.arrFacingRight) {
 
-            Personajes obj = i.next();
             AnimationSprite animWalk = null;
             AnimationSprite animAttack = null;
             AnimationSprite animDie = null;
-            Sprite spriteHurt = null;
+            com.badlogic.gdx.graphics.g2d.Sprite spriteHurt = null;
 
             float ajusteY = 0, ajusteX = 0;
             float sizeX = 0, sizeY = 0;
@@ -209,13 +197,13 @@ public class WorldGameRenderer2 {
                 animDie = Assets.heroForceDie;
                 spriteHurt = Assets.heroForceHurt;
                 sizeX = sizeY = .7f;
-            } else if (obj instanceof HeroFarmer) {
+            } else if (obj instanceof com.nopalsoft.zombiewars.objects.HeroFarmer) {
                 animWalk = Assets.heroFarmerWalk;
                 animAttack = Assets.heroFarmerShoot;
                 animDie = Assets.heroFarmerDie;
                 spriteHurt = Assets.heroFarmerHurt;
                 sizeX = sizeY = .7f;
-            } else if (obj instanceof HeroLumber) {
+            } else if (obj instanceof com.nopalsoft.zombiewars.objects.HeroLumber) {
                 animWalk = Assets.heroLumberWalk;
                 animAttack = Assets.heroLumberShoot;
                 animDie = Assets.heroLumberDie;
@@ -225,16 +213,16 @@ public class WorldGameRenderer2 {
                 ajusteX = -.15f;
             }
 
-            Sprite spriteFrame = null;
+            com.badlogic.gdx.graphics.g2d.Sprite spriteFrame = null;
 
-            if (obj.state == Personajes.STATE_NORMAL) {
+            if (obj.state == com.nopalsoft.zombiewars.objects.Personajes.STATE_NORMAL) {
                 spriteFrame = animWalk.getKeyFrame(obj.stateTime, true);
 
-            } else if (obj.state == Personajes.STATE_ATTACK) {
+            } else if (obj.state == com.nopalsoft.zombiewars.objects.Personajes.STATE_ATTACK) {
                 spriteFrame = animAttack.getKeyFrame(obj.stateTime, false);
-            } else if (obj.state == Personajes.STATE_DEAD) {
+            } else if (obj.state == com.nopalsoft.zombiewars.objects.Personajes.STATE_DEAD) {
                 spriteFrame = animDie.getKeyFrame(obj.stateTime, false);
-            } else if (obj.state == Personajes.STATE_HURT) {
+            } else if (obj.state == com.nopalsoft.zombiewars.objects.Personajes.STATE_HURT) {
                 spriteFrame = spriteHurt;
             }
 
@@ -246,14 +234,11 @@ public class WorldGameRenderer2 {
     }
 
     private void drawBullets() {
-        Iterator<Bullet> i = oWorld.arrBullets.iterator();
-        while (i.hasNext()) {
-            Bullet obj = i.next();
-
+        for (Bullet obj : oWorld.arrBullets) {
             if (!obj.isVisible)
                 continue;
 
-            AnimationSprite animBullet = Assets.bullet1;
+            com.nopalsoft.zombiewars.AnimationSprite animBullet = com.nopalsoft.zombiewars.Assets.bullet1;
 
             if (obj.state == Bullet.STATE_DESTROY)
                 continue;
