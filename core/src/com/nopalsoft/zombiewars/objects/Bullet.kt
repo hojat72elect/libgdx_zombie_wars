@@ -74,7 +74,7 @@ class Bullet(
         const val STATE_NORMAL = 1
         const val STATE_HIT = 2
         const val STATE_DESTROY = 3
-        val DURATION_MUZZLE: Float = Assets.muzzle.animationDuration
+        val DURATION_MUZZLE: Float = Assets.muzzle!!.animationDuration
         var VELOCIDAD: Float = 5f
     }
 }

@@ -5,8 +5,8 @@ import com.nopalsoft.zombiewars.Assets
 
 class ZombieKid(body: Body) : Personajes(body) {
     init {
-        DURATION_ATTACK = Assets.zombieKidAttack.animationDuration
-        DURATION_DEAD = Assets.zombieKidDie.animationDuration + .2F
+        DURATION_ATTACK = Assets.zombieKidAttack!!.animationDuration
+        DURATION_DEAD = Assets.zombieKidDie!!.animationDuration + .2F
         VELOCIDAD_WALK = .3F
         DISTANCE_ATTACK = .35F
         DAMAGE = 1

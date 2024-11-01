@@ -5,8 +5,8 @@ import com.nopalsoft.zombiewars.Assets
 
 class ZombiePan(body: Body) : Personajes(body) {
     init {
-        DURATION_ATTACK = Assets.zombiePanAttack.animationDuration
-        DURATION_DEAD = Assets.zombiePanDie.animationDuration + .2F
+        DURATION_ATTACK = Assets.zombiePanAttack!!.animationDuration
+        DURATION_DEAD = Assets.zombiePanDie!!.animationDuration + .2F
         VELOCIDAD_WALK = .75F
         DISTANCE_ATTACK = .35F
         DAMAGE = 1

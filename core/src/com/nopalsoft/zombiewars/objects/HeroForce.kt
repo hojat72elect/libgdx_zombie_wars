@@ -5,8 +5,8 @@ import com.nopalsoft.zombiewars.Assets
 
 class HeroForce(body: Body) : Personajes(body) {
     init {
-        DURATION_ATTACK = Assets.heroForceShoot.animationDuration
-        DURATION_DEAD = Assets.heroForceDie.animationDuration + .2F
+        DURATION_ATTACK = Assets.heroForceShoot!!.animationDuration
+        DURATION_DEAD = Assets.heroForceDie!!.animationDuration + .2F
         VELOCIDAD_WALK = 1F
         DAMAGE = 1
         DISTANCE_ATTACK = 2F
