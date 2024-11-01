@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.tiled.AtlasTmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -225,9 +224,6 @@ public class Assets {
         zombieMummyAttack = loadAnimationAttack(atlas, "ZombieMummy/");
         zombieMummyDie = loadAnimationDie(atlas, "ZombieMummy/");
         zombieMummyHurt = atlas.createSprite("ZombieMummy/die1");
-
-        Settings.load();
-
     }
 
     private static AnimationSprite loadAnimationWalk(TextureAtlas atlas, String ruta) {
@@ -332,11 +328,8 @@ public class Assets {
             map = null;
         }
 
-        if (Settings.isTest) {
-            map = new TmxMapLoader().load("data/MapsTest/suelo.tmx");
-        } else {
-            map = new AtlasTmxMapLoader().load("data/Maps/suelo.tmx");
-        }
+        map = new TmxMapLoader().load("data/MapsTest/suelo.tmx");
+
     }
 
 }

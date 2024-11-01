@@ -6,8 +6,8 @@ import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.math.MathUtils;
 import com.nopalsoft.zombiewars.Assets;
 import com.nopalsoft.zombiewars.MainZombieWars;
-import com.nopalsoft.zombiewars.Settings;
 import com.nopalsoft.zombiewars.screens.Screens;
+import com.nopalsoft.zombiewars.Settings;
 
 public class GameScreen extends Screens {
     static final int STATE_RUNNING = 0;
@@ -46,6 +46,7 @@ public class GameScreen extends Screens {
             accelCamX = 0;
 
         if (Gdx.input.isKeyPressed(Keys.Z)) {
+
             Settings.zoom += .025F;
             if (Settings.zoom > 2.105f)
                 Settings.zoom = 2.105f;

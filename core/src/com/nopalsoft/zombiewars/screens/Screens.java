@@ -14,8 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.nopalsoft.zombiewars.Assets;
 import com.nopalsoft.zombiewars.MainZombieWars;
-import com.nopalsoft.zombiewars.Settings;
-import com.nopalsoft.zombiewars.game.GameScreen;
 import com.nopalsoft.zombiewars.scene2d.AnimatedSpriteActor;
 
 public abstract class Screens extends InputAdapter implements Screen {
@@ -113,8 +111,6 @@ public abstract class Screens extends InputAdapter implements Screen {
             music.dispose();
             music = null;
         }
-
-        Settings.save();
     }
 
     @Override
