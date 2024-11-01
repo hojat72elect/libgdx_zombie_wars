@@ -1,7 +1,5 @@
 package com.nopalsoft.zombiewars.game;
 
-import java.util.Iterator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
@@ -18,31 +16,30 @@ import com.nopalsoft.zombiewars.Settings;
 import com.nopalsoft.zombiewars.objetos.Bullet;
 import com.nopalsoft.zombiewars.objetos.Personajes;
 import com.nopalsoft.zombiewars.screens.Screens;
+import java.util.Iterator;
 
 public class WorldGame {
-    final float WIDTH = Screens.WORLD_WIDTH;
-    final float HEIGHT = Screens.WORLD_HEIGHT;
-
     static final int STATE_RUNNING = 0;
     static final int STATE_GAMEOVER = 1;
     static final int STATE_NEXT_LEVEL = 2;
-    public int state;
-
+    final float WIDTH = Screens.WORLD_WIDTH;
+    final float HEIGHT = Screens.WORLD_HEIGHT;
     final float TIME_TO_SPAWN_ZOMBIE_FRANK;
-    float timeToSpwanZombieFrank;
-
     final float TIME_TO_SPAWN_ZOMBIE_CUASY;
-    float timeToSpwanZombieCuasy;
-
     final float TIME_TO_SPAWN_ZOMBIE_KID;
-    float timeToSpwanZombieKid;
-
     final float TIME_TO_SPAWN_ZOMBIE_MUMMY;
-    float timeToSpwanZombieMummy;
-
     final float TIME_TO_SPAWN_ZOMBIE_PAN;
+    public int state;
+    public int tiledWidth;
+    public int tiledHeight;
+    public World oWorldBox;
+    public ObjectCreatorManagerBox2d objectCreatorManager;
+    public Vector2 posCamara;
+    float timeToSpwanZombieFrank;
+    float timeToSpwanZombieCuasy;
+    float timeToSpwanZombieKid;
+    float timeToSpwanZombieMummy;
     float timeToSpwanZombiePan;
-
     /**
      * Mis tiles son de 32px, asi que la unidad seria 1/32 con una camara ortograpicha de 10x15 para ver 10 tiles de ancho y 15 de alto. El probema es que mi camara es de 8x4.8f por eso tengo que
      * cambiar la escala, con 1/32 solo veria 8 tiles a lo ancho y de altura 4.8 por como esta configurada la camara.
@@ -50,16 +47,7 @@ public class WorldGame {
      * con 1/96 veo 24 tiles a lo ancho
      */
     float unitScale = 1 / 76f;
-    public int tiledWidth;
-    public int tiledHeight;
-
     float xMin, xMax, yMin;
-
-    public World oWorldBox;
-    public ObjectCreatorManagerBox2d objectCreatorManager;
-
-    public Vector2 posCamara;
-
     Array<Personajes> arrFacingRight;
     Array<Personajes> arrFacingLeft;
     Array<Bullet> arrBullets;

@@ -11,17 +11,13 @@ import com.nopalsoft.zombiewars.screens.Screens;
 
 public class GameScreen extends Screens {
     static final int STATE_RUNNING = 0;
-    static final int STATE_GAME_OVER = 1;
-    static final int STATE_NEXT_LEVEL = 2;
-    static final int STATE_PAUSED = 3;
-    int state;
-
     public WorldGame oWorld;
+    int state;
     WorldGameRenderer2 renderer;
 
     float accelCamX;
 
-    public GameScreen(MainZombieWars game, int level) {
+    public GameScreen(MainZombieWars game) {
         super(game);
 
         oWorld = new WorldGame(0);
@@ -32,10 +28,8 @@ public class GameScreen extends Screens {
     @Override
     public void update(float delta) {
 
-        switch (state) {
-            case STATE_RUNNING:
-                updateRunning(delta);
-                break;
+        if (state == STATE_RUNNING) {
+            updateRunning(delta);
         }
 
     }
@@ -52,11 +46,11 @@ public class GameScreen extends Screens {
             accelCamX = 0;
 
         if (Gdx.input.isKeyPressed(Keys.Z)) {
-            Settings.zoom += .025;
+            Settings.zoom += .025F;
             if (Settings.zoom > 2.105f)
                 Settings.zoom = 2.105f;
         } else if (Gdx.input.isKeyPressed(Keys.X)) {
-            Settings.zoom -= .025;
+            Settings.zoom -= .025F;
             if (Settings.zoom < 1)
                 Settings.zoom = 1;
         }

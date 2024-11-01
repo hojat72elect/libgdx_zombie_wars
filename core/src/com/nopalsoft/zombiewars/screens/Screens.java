@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.nopalsoft.zombiewars.Assets;
 import com.nopalsoft.zombiewars.MainZombieWars;
 import com.nopalsoft.zombiewars.Settings;
@@ -94,7 +93,7 @@ public abstract class Screens extends InputAdapter implements Screen {
 			public void run() {
 				if (newScreen == GameScreen.class) {
 					Assets.loadTiledMap(level);
-					game.setScreen(new GameScreen(game, level));
+					game.setScreen(new GameScreen(game));
 				}
 				// else if (newScreen == MainMenuScreen.class)
 				// game.setScreen(new MainMenuScreen(game));
