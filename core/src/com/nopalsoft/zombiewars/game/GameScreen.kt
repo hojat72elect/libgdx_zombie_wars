@@ -59,11 +59,11 @@ class GameScreen(game: MainZombieWars) : Screens(game) {
         else if (keycode == Input.Keys.C) oWorld.atackaLL()
         else if (keycode == Input.Keys.V) oWorld.dieALl()
         else if (keycode == Input.Keys.E) if (MathUtils.randomBoolean()) {
-            oWorld.objectCreatorManager.creatHeroLumber()
+            oWorld.objectCreatorManager.createHeroLumber()
         } else if (MathUtils.randomBoolean()) {
-            oWorld.objectCreatorManager.creatHeroFarmer()
+            oWorld.objectCreatorManager.createHeroFarmer()
         } else {
-            oWorld.objectCreatorManager.creatHeroForce()
+            oWorld.objectCreatorManager.createHeroForce()
         }
         return super.keyDown(keycode)
     }

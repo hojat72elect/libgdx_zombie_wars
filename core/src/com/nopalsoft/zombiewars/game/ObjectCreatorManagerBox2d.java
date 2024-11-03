@@ -28,38 +28,38 @@ public class ObjectCreatorManagerBox2d {
     }
 
     public void createZombieKid() {
-        crearZombieMalo(ZombieKid.class);
+        createZombieMalo(ZombieKid.class);
     }
 
     public void createZombieCuasy() {
-        crearZombieMalo(ZombieCuasy.class);
+        createZombieMalo(ZombieCuasy.class);
     }
 
     public void createZombieMummy() {
-        crearZombieMalo(ZombieMummy.class);
+        createZombieMalo(ZombieMummy.class);
     }
 
     public void createZombiePan() {
-        crearZombieMalo(ZombiePan.class);
+        createZombieMalo(ZombiePan.class);
     }
 
     public void createZombieFrank() {
-        crearZombieMalo(ZombieFrank.class);
+        createZombieMalo(ZombieFrank.class);
     }
 
-    public void creatHeroForce() {
-        crearHero(HeroForce.class);
+    public void createHeroForce() {
+        createHero(HeroForce.class);
     }
 
-    public void creatHeroFarmer() {
-        crearHero(HeroFarmer.class);
+    public void createHeroFarmer() {
+        createHero(HeroFarmer.class);
     }
 
-    public void creatHeroLumber() {
-        crearHero(HeroLumber.class);
+    public void createHeroLumber() {
+        createHero(HeroLumber.class);
     }
 
-    private void crearZombieMalo(Class<?> tipoZombie) {
+    private void createZombieMalo(Class<?> zombieType) {
         Personajes obj = null;
 
         BodyDef bd = new BodyDef();
@@ -68,15 +68,15 @@ public class ObjectCreatorManagerBox2d {
 
         Body oBody = oWorldBox.createBody(bd);
 
-        if (tipoZombie == ZombieKid.class) {
+        if (zombieType == ZombieKid.class) {
             obj = new ZombieKid(oBody);
-        } else if (tipoZombie == ZombieCuasy.class) {
+        } else if (zombieType == ZombieCuasy.class) {
             obj = new ZombieCuasy(oBody);
-        } else if (tipoZombie == ZombieMummy.class) {
+        } else if (zombieType == ZombieMummy.class) {
             obj = new ZombieMummy(oBody);
-        } else if (tipoZombie == ZombiePan.class) {
+        } else if (zombieType == ZombiePan.class) {
             obj = new ZombiePan(oBody);
-        } else if (tipoZombie == ZombieFrank.class) {
+        } else if (zombieType == ZombieFrank.class) {
             obj = new ZombieFrank(oBody);
         }
 
@@ -98,7 +98,7 @@ public class ObjectCreatorManagerBox2d {
 
     }
 
-    private void crearHero(Class<?> tipoHero) {
+    private void createHero(Class<?> heroType) {
         Personajes obj = null;
 
         BodyDef bd = new BodyDef();
@@ -107,11 +107,11 @@ public class ObjectCreatorManagerBox2d {
 
         Body oBody = oWorldBox.createBody(bd);
 
-        if (tipoHero == HeroForce.class) {
+        if (heroType == HeroForce.class) {
             obj = new HeroForce(oBody);
-        } else if (tipoHero == HeroFarmer.class) {
+        } else if (heroType == HeroFarmer.class) {
             obj = new HeroFarmer(oBody);
-        } else if (tipoHero == HeroLumber.class) {
+        } else if (heroType == HeroLumber.class) {
             obj = new HeroLumber(oBody);
         }
 
