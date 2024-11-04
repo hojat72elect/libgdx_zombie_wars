@@ -3,15 +3,15 @@ package com.nopalsoft.zombiewars.objects
 import com.badlogic.gdx.physics.box2d.Body
 import com.nopalsoft.zombiewars.Assets
 
-class ZombieCuasy(body: Body) : Personajes(body) {
+class ZombieCuasy(body: Body) : GameCharacter(body) {
     init {
-        DURATION_ATTACK = Assets.zombieCuasyAttack!!.animationDuration
-        DURATION_DEAD = Assets.zombieCuasyDie!!.animationDuration + .2F
-        VELOCIDAD_WALK = .15F
-        DISTANCE_ATTACK = .35F
-        DAMAGE = 1
-        vidas = 5
+        attackAnimationDuration = Assets.zombieCuasyAttack!!.animationDuration
+        deathAnimationDuration = Assets.zombieCuasyDie!!.animationDuration + .2F
+        walkSpeed = .15F
+        attackDistance = .35F
+        damage = 1
+        lives = 5
         isFacingLeft = true
-        tipo = TIPO_NO_RANGO
+        type = TYPE_NO_RANGE
     }
 }

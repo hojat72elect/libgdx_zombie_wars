@@ -56,8 +56,8 @@ class GameScreen(game: MainZombieWars) : Screens(game) {
     override fun keyDown(keycode: Int): Boolean {
 
         if (keycode == Input.Keys.ESCAPE) Gdx.app.exit()
-        else if (keycode == Input.Keys.C) oWorld.atackaLL()
-        else if (keycode == Input.Keys.V) oWorld.dieALl()
+        else if (keycode == Input.Keys.C) oWorld.attackAll()
+        else if (keycode == Input.Keys.V) oWorld.dieAll()
         else if (keycode == Input.Keys.E) if (MathUtils.randomBoolean()) {
             oWorld.objectCreatorManager.createHeroLumber()
         } else if (MathUtils.randomBoolean()) {

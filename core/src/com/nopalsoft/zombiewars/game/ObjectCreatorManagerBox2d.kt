@@ -7,7 +7,7 @@ import com.nopalsoft.zombiewars.objects.Bullet
 import com.nopalsoft.zombiewars.objects.HeroFarmer
 import com.nopalsoft.zombiewars.objects.HeroForce
 import com.nopalsoft.zombiewars.objects.HeroLumber
-import com.nopalsoft.zombiewars.objects.Personajes
+import com.nopalsoft.zombiewars.objects.GameCharacter
 import com.nopalsoft.zombiewars.objects.ZombieCuasy
 import com.nopalsoft.zombiewars.objects.ZombieFrank
 import com.nopalsoft.zombiewars.objects.ZombieKid
@@ -51,7 +51,7 @@ class ObjectCreatorManagerBox2d(private val oWorld: WorldGame) {
     }
 
     private fun createZombieMalo(zombieType: Class<*>) {
-        var obj: Personajes? = null
+        var obj: GameCharacter? = null
 
         val bd = BodyDef()
         bd.position.set(16f, 1.6f)
@@ -99,7 +99,7 @@ class ObjectCreatorManagerBox2d(private val oWorld: WorldGame) {
     }
 
     private fun createHero(heroType: Class<*>) {
-        var obj: Personajes? = null
+        var obj: GameCharacter? = null
 
         val bd = BodyDef()
         bd.position.set(1f, 1.6f)
@@ -138,11 +138,11 @@ class ObjectCreatorManagerBox2d(private val oWorld: WorldGame) {
         shape.dispose()
     }
 
-    fun createBullet(oPerWhoFired: Personajes) {
+    fun createBullet(oPerWhoFired: GameCharacter) {
         val obj: Bullet
         val bd = BodyDef()
 
-        if (oPerWhoFired.tipo == Personajes.TIPO_RANGO) {
+        if (oPerWhoFired.type == GameCharacter.TYPE_RANGE) {
             if (oPerWhoFired.isFacingLeft) {
                 bd.position.set(oPerWhoFired.position.x - .42f, oPerWhoFired.position.y - .14f)
             } else {

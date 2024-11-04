@@ -13,7 +13,7 @@ import com.nopalsoft.zombiewars.objects.Bullet
 import com.nopalsoft.zombiewars.objects.HeroFarmer
 import com.nopalsoft.zombiewars.objects.HeroForce
 import com.nopalsoft.zombiewars.objects.HeroLumber
-import com.nopalsoft.zombiewars.objects.Personajes
+import com.nopalsoft.zombiewars.objects.GameCharacter
 import com.nopalsoft.zombiewars.objects.ZombieCuasy
 import com.nopalsoft.zombiewars.objects.ZombieFrank
 import com.nopalsoft.zombiewars.objects.ZombieKid
@@ -164,16 +164,16 @@ class WorldGameRenderer2(batcher: SpriteBatch, oWorld: WorldGame) {
             var spriteFrame: Sprite? = null
 
             when (obj.state) {
-                Personajes.STATE_NORMAL -> {
+                GameCharacter.STATE_NORMAL -> {
                     spriteFrame = animWalk!!.getKeyFrame(obj.stateTime, true)
                 }
-                Personajes.STATE_ATTACK -> {
+                GameCharacter.STATE_ATTACK -> {
                     spriteFrame = animAttack!!.getKeyFrame(obj.stateTime, false)
                 }
-                Personajes.STATE_DEAD -> {
+                GameCharacter.STATE_DEAD -> {
                     spriteFrame = animDie!!.getKeyFrame(obj.stateTime, false)
                 }
-                Personajes.STATE_HURT -> {
+                GameCharacter.STATE_HURT -> {
                     spriteFrame = spriteHurt
                 }
             }
@@ -230,16 +230,16 @@ class WorldGameRenderer2(batcher: SpriteBatch, oWorld: WorldGame) {
             var spriteFrame: Sprite? = null
 
             when (obj.state) {
-                Personajes.STATE_NORMAL -> {
+                GameCharacter.STATE_NORMAL -> {
                     spriteFrame = animWalk!!.getKeyFrame(obj.stateTime, true)
                 }
-                Personajes.STATE_ATTACK -> {
+                GameCharacter.STATE_ATTACK -> {
                     spriteFrame = animAttack!!.getKeyFrame(obj.stateTime, false)
                 }
-                Personajes.STATE_DEAD -> {
+                GameCharacter.STATE_DEAD -> {
                     spriteFrame = animDie!!.getKeyFrame(obj.stateTime, false)
                 }
-                Personajes.STATE_HURT -> {
+                GameCharacter.STATE_HURT -> {
                     spriteFrame = spriteHurt
                 }
             }

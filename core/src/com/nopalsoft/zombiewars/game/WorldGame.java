@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.Array;
 import com.nopalsoft.zombiewars.Assets;
 import com.nopalsoft.zombiewars.Settings;
 import com.nopalsoft.zombiewars.objects.Bullet;
-import com.nopalsoft.zombiewars.objects.Personajes;
+import com.nopalsoft.zombiewars.objects.GameCharacter;
 
 public class WorldGame {
     static final int STATE_RUNNING = 0;
@@ -30,27 +30,27 @@ public class WorldGame {
     public World oWorldBox;
     public ObjectCreatorManagerBox2d objectCreatorManager;
     public Vector2 posCamara;
-    float timeToSpwanZombieFrank;
-    float timeToSpwanZombieCuasy;
-    float timeToSpwanZombieKid;
-    float timeToSpwanZombieMummy;
-    float timeToSpwanZombiePan;
-    /**
-     * Mis tiles son de 32px, asi que la unidad seria 1/32 con una camara ortograpicha de 10x15 para ver 10 tiles de ancho y 15 de alto. El probema es que mi camara es de 8x4.8f por eso tengo que
-     * cambiar la escala, con 1/32 solo veria 8 tiles a lo ancho y de altura 4.8 por como esta configurada la camara.
+    float timeToSpawnZombieFrank;
+    float timeToSpawnZombieCuasy;
+    float timeToSpawnZombieKid;
+    float timeToSpawnZombieMummy;
+    float timeToSpawnZombiePan;
+    /*
+     * My tiles are 32px, so the unit would be 1/32 with a 10x15 orthographic camera to see 10 tiles wide and 15 high. The problem is that my camera is 8x4.8f so I have
+     * to change the scale, with 1/32 I would only see 8 tiles wide and 4.8 high because of how the camera is configured.
      * <p>
-     * con 1/96 veo 24 tiles a lo ancho
+     * with 1/96 I see 24 tiles wide
      */
     float unitScale = 1 / 76f;
     float xMin, xMax, yMin;
-    Array<Personajes> arrFacingRight;
-    Array<Personajes> arrFacingLeft;
+    Array<GameCharacter> arrFacingRight;
+    Array<GameCharacter> arrFacingLeft;
     Array<Bullet> arrBullets;
     Array<Body> arrBodies;
 
-    public WorldGame(int nivel) {
+    public WorldGame(int level) {
         oWorldBox = new World(new Vector2(0, -9.8f), true);
-        oWorldBox.setContactListener(new com.nopalsoft.zombiewars.game.WorldGame.Colisiones());
+        oWorldBox.setContactListener(new com.nopalsoft.zombiewars.game.WorldGame.Collision());
 
         arrFacingRight = new Array<>();
         arrFacingLeft = new Array<>();
@@ -70,14 +70,14 @@ public class WorldGame {
         Gdx.app.log("Tile Width", tiledWidth + "");
         Gdx.app.log("Tile Height", tiledHeight + "");
 
-        xMin = 4.0f;// Inicia en 4 porque la camara esta centrada no en el origen
-        xMax = unitScale * tiledWidth * 32 - 4;// Menos 4 porque la camara esta centrada en el origen
+        xMin = 4.0f;// Starts at 4 because the camera is centered not at the origin
+        xMax = unitScale * tiledWidth * 32 - 4;// Minus 4 because the camera is centered at the origin
         yMin = 2.4f;
 
         posCamara = new Vector2(xMin, yMin);
         state = STATE_RUNNING;
 
-        if (nivel == 0) {
+        if (level == 0) {
             TIME_TO_SPAWN_ZOMBIE_KID = 3f;
             TIME_TO_SPAWN_ZOMBIE_CUASY = 10f;
             TIME_TO_SPAWN_ZOMBIE_MUMMY = 15f;
@@ -97,15 +97,15 @@ public class WorldGame {
         oWorldBox.step(delta, 8, 4);
         updateCamara(delta, accelCamX);
 
-        eliminarObjetos();
+        deleteObjects();
 
         spawnStuff(delta);
 
         oWorldBox.getBodies(arrBodies);
 
         for (Body body : arrBodies) {
-            if (body.getUserData() instanceof Personajes) {
-                Personajes obj = (Personajes) body.getUserData();
+            if (body.getUserData() instanceof GameCharacter) {
+                GameCharacter obj = (GameCharacter) body.getUserData();
                 if (obj.isFacingLeft)
                     updateFacingLeft(delta, obj);
                 else
@@ -116,9 +116,9 @@ public class WorldGame {
         }
     }
 
-    public void atackaLL() {
+    public void attackAll() {
 
-        for (Personajes obj : arrFacingLeft) {
+        for (GameCharacter obj : arrFacingLeft) {
 
             if (obj.attack())
 
@@ -126,9 +126,9 @@ public class WorldGame {
         }
     }
 
-    public void dieALl() {
+    public void dieAll() {
 
-        for (Personajes obj : arrFacingLeft) {
+        for (GameCharacter obj : arrFacingLeft) {
 
             obj.die();
         }
@@ -136,33 +136,33 @@ public class WorldGame {
 
     private void spawnStuff(float delta) {
 
-        timeToSpwanZombieKid += delta;
-        if (timeToSpwanZombieKid >= TIME_TO_SPAWN_ZOMBIE_KID) {
-            timeToSpwanZombieKid -= TIME_TO_SPAWN_ZOMBIE_KID;
+        timeToSpawnZombieKid += delta;
+        if (timeToSpawnZombieKid >= TIME_TO_SPAWN_ZOMBIE_KID) {
+            timeToSpawnZombieKid -= TIME_TO_SPAWN_ZOMBIE_KID;
             objectCreatorManager.createZombieKid();
         }
 
-        timeToSpwanZombieCuasy += delta;
-        if (timeToSpwanZombieCuasy >= TIME_TO_SPAWN_ZOMBIE_CUASY) {
-            timeToSpwanZombieCuasy -= TIME_TO_SPAWN_ZOMBIE_CUASY;
+        timeToSpawnZombieCuasy += delta;
+        if (timeToSpawnZombieCuasy >= TIME_TO_SPAWN_ZOMBIE_CUASY) {
+            timeToSpawnZombieCuasy -= TIME_TO_SPAWN_ZOMBIE_CUASY;
             objectCreatorManager.createZombieCuasy();
         }
 
-        timeToSpwanZombieMummy += delta;
-        if (timeToSpwanZombieMummy >= TIME_TO_SPAWN_ZOMBIE_MUMMY) {
-            timeToSpwanZombieMummy -= TIME_TO_SPAWN_ZOMBIE_MUMMY;
+        timeToSpawnZombieMummy += delta;
+        if (timeToSpawnZombieMummy >= TIME_TO_SPAWN_ZOMBIE_MUMMY) {
+            timeToSpawnZombieMummy -= TIME_TO_SPAWN_ZOMBIE_MUMMY;
             objectCreatorManager.createZombieMummy();
         }
 
-        timeToSpwanZombiePan += delta;
-        if (timeToSpwanZombiePan >= TIME_TO_SPAWN_ZOMBIE_PAN) {
-            timeToSpwanZombiePan -= TIME_TO_SPAWN_ZOMBIE_PAN;
+        timeToSpawnZombiePan += delta;
+        if (timeToSpawnZombiePan >= TIME_TO_SPAWN_ZOMBIE_PAN) {
+            timeToSpawnZombiePan -= TIME_TO_SPAWN_ZOMBIE_PAN;
             objectCreatorManager.createZombiePan();
         }
 
-        timeToSpwanZombieFrank += delta;
-        if (timeToSpwanZombieFrank >= TIME_TO_SPAWN_ZOMBIE_FRANK) {
-            timeToSpwanZombieFrank -= TIME_TO_SPAWN_ZOMBIE_FRANK;
+        timeToSpawnZombieFrank += delta;
+        if (timeToSpawnZombieFrank >= TIME_TO_SPAWN_ZOMBIE_FRANK) {
+            timeToSpawnZombieFrank -= TIME_TO_SPAWN_ZOMBIE_FRANK;
             objectCreatorManager.createZombieFrank();
         }
 
@@ -183,14 +183,14 @@ public class WorldGame {
 
     }
 
-    private void updateFacingRight(float delta, Personajes obj) {
+    private void updateFacingRight(float delta, GameCharacter obj) {
         obj.update(delta);
 
         int len = arrFacingLeft.size;
         for (int i = 0; i < len; i++) {
-            Personajes objMalo = arrFacingLeft.get(i);
+            GameCharacter objMalo = arrFacingLeft.get(i);
 
-            if (obj.position.dst(objMalo.position.x, objMalo.position.y) <= obj.DISTANCE_ATTACK) {
+            if (obj.position.dst(objMalo.position.x, objMalo.position.y) <= obj.attackDistance) {
                 if (obj.attack())
                     objectCreatorManager.createBullet(obj);
 
@@ -198,13 +198,13 @@ public class WorldGame {
         }
     }
 
-    private void updateFacingLeft(float delta, Personajes obj) {
+    private void updateFacingLeft(float delta, GameCharacter obj) {
         obj.update(delta);
 
         int len = arrFacingRight.size;
         for (int i = 0; i < len; i++) {
-            Personajes objBueno = arrFacingRight.get(i);
-            if (obj.position.dst(objBueno.position.x, objBueno.position.y) <= obj.DISTANCE_ATTACK) {
+            GameCharacter objBueno = arrFacingRight.get(i);
+            if (obj.position.dst(objBueno.position.x, objBueno.position.y) <= obj.attackDistance) {
                 if (obj.attack())
                     objectCreatorManager.createBullet(obj);
 
@@ -221,14 +221,14 @@ public class WorldGame {
 
     }
 
-    private void eliminarObjetos() {
+    private void deleteObjects() {
         oWorldBox.getBodies(arrBodies);
 
         for (Body body : arrBodies) {
             if (!oWorldBox.isLocked()) {
-                if (body.getUserData() instanceof Personajes) {
-                    Personajes obj = (Personajes) body.getUserData();
-                    if (obj.state == Personajes.STATE_DEAD && obj.stateTime >= obj.DURATION_DEAD) {
+                if (body.getUserData() instanceof GameCharacter) {
+                    GameCharacter obj = (GameCharacter) body.getUserData();
+                    if (obj.state == GameCharacter.STATE_DEAD && obj.stateTime >= obj.deathAnimationDuration) {
                         if (obj.isFacingLeft)
                             arrFacingLeft.removeValue(obj, true);
                         else
@@ -248,7 +248,7 @@ public class WorldGame {
         }
     }
 
-    static class Colisiones implements ContactListener {
+    static class Collision implements ContactListener {
 
         @Override
         public void beginContact(Contact contact) {
@@ -265,14 +265,14 @@ public class WorldGame {
             Object oOtraCosa = otraCosa.getBody().getUserData();
             Bullet oBullet = (Bullet) fixBullet.getBody().getUserData();
 
-            if (oOtraCosa instanceof Personajes) {
+            if (oOtraCosa instanceof GameCharacter) {
                 if (oBullet.state == Bullet.STATE_NORMAL || oBullet.state == Bullet.STATE_MUZZLE) {
-                    Personajes obj = (Personajes) oOtraCosa;
+                    GameCharacter obj = (GameCharacter) oOtraCosa;
 
                     if (obj.isFacingLeft == oBullet.isFacingLeft)// Si van hacia el mismo lado son amigos
                         return;
 
-                    if (obj.state != Personajes.STATE_DEAD) {
+                    if (obj.state != GameCharacter.STATE_DEAD) {
 
                         obj.getHurt(oBullet.DAMAGE);
                         oBullet.hit();

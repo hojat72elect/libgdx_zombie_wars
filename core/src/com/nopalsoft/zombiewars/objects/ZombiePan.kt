@@ -3,15 +3,15 @@ package com.nopalsoft.zombiewars.objects
 import com.badlogic.gdx.physics.box2d.Body
 import com.nopalsoft.zombiewars.Assets
 
-class ZombiePan(body: Body) : Personajes(body) {
+class ZombiePan(body: Body) : GameCharacter(body) {
     init {
-        DURATION_ATTACK = Assets.zombiePanAttack!!.animationDuration
-        DURATION_DEAD = Assets.zombiePanDie!!.animationDuration + .2F
-        VELOCIDAD_WALK = .75F
-        DISTANCE_ATTACK = .35F
-        DAMAGE = 1
-        vidas = 3
+        attackAnimationDuration = Assets.zombiePanAttack!!.animationDuration
+        deathAnimationDuration = Assets.zombiePanDie!!.animationDuration + .2F
+        walkSpeed = .75F
+        attackDistance = .35F
+        damage = 1
+        lives = 3
         isFacingLeft = true
-        tipo = TIPO_NO_RANGO
+        type = TYPE_NO_RANGE
     }
 }
