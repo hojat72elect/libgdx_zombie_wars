@@ -58,7 +58,7 @@ public class WorldGame {
         arrBodies = new Array<>();
 
         objectCreatorManager = new ObjectCreatorManagerBox2d(this);
-        new TiledMapManagerBox2d(this, unitScale).createObjetosDesdeTiled(Assets.map);
+        new TiledMapManagerBox2d(this, unitScale).createTiledObjects(Assets.map);
         tiledWidth = ((TiledMapTileLayer) Assets.map.getLayers().get("1")).getWidth();
         tiledHeight = ((TiledMapTileLayer) Assets.map.getLayers().get("1")).getHeight();
 
